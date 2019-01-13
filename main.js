@@ -21,3 +21,5 @@ var app = new Vue({ // options go here
 		}
   	}
 })
+
+// some changes
