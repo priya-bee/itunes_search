@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import SearchApi from '../services/search'
+// import SearchApi from '../services/search'
 
 
 Vue.config.productionTip = false
@@ -11,4 +11,4 @@ new Vue({
 
 
 
-SearchApi.getResults('jack johnson');
+SearchApi.getResults('neutral milk hotel');
