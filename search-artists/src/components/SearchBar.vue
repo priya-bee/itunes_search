@@ -4,12 +4,21 @@
     <button v-on:click="displayResults(searchTerm)">Find</button>
     <button v-on:click="clear">Clear</button>
     <div>{{searchTerm}}</div>
-    <div v-if="output.songs"> SONGS 
-      <ul id="songlist">
-        <li v-for="song in output.songs">
-          {{song}}
-          <img :src="song.artwork"/> <!-- v-binding the artwork to the img src attribute-->
-        </li>
+
+    <div v-if="output.songs">
+      SONGS
+      <MediaComponent :mediaData="output.songs"></MediaComponent>
+    </div>
+
+    <div v-if="output.books">
+      BOOKS
+      <MediaComponent :mediaData="output.books"></MediaComponent>
+    </div>
+
+    <div v-if="favorites">
+      FAVORITES 
+      <ul>
+        <li v-for="fav in favorites">{{fav}}</li>
       </ul>
     </div>
 
@@ -18,13 +27,14 @@
 
 <script>
   import SearchApi from '../../services/search'
-
+  import MediaComponent from './Media'
   export default {
     name: 'SearchBar',
     data: function() {
     	return {
         searchTerm: '',
-        output: []
+        output: [],
+        favorites: null
       }
     },
     methods: {
@@ -39,6 +49,28 @@
       clear(){
         this.searchTerm = ''
       }
+    },
+    components: {
+      MediaComponent
     }
   }
 </script>
+
+<style>
+  .results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .media{
+    display: flex;
+    flex-direction: column;
+
+    .li{
+            display: flex;
+            flex-direction: column;
+
+    }
+  }
+</style>
