@@ -15,13 +15,20 @@ import axios from 'axios'
 // }
 export default{
 	// var myScope = this;
+	returnme: [],
 	getResults: function(s){
-		console.log(s);
-		axios.get('http://itunes.apple.com/search?term=' + s).then(response => {
-			console.log(response.data.results)
-			return response.data.results;
-		}, response => {
-			// error callback
+		// var myScope = this;
+		// axios.get('http://itunes.apple.com/search?term=' + s).then(response => {
+		// 	// console.log(response.data.results)
+		// 	// return response.data.results;
+		// 	// myScope.returnme = response.data.results;
+		// 	// console.log(myScope.returnme);
+		// }, response => {
+		// 	// error callback
+		// });
+
+		return axios.get('http://itunes.apple.com/search?term=' + s).then(res => { // this returns a promise
+			return res;
 		});
 	}
 }
