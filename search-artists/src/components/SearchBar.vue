@@ -23,7 +23,8 @@
       displayResults(s){
         var myScope = this; // save the scope since we set output in a callback
         SearchApi.getResults(s).then(res =>{
-          this.output = res.data; // TO: PARSE AND DISPLAY THIS DATA
+          this.output = res; // TO DO: PARSE AND DISPLAY THIS DATA
+          // parseData(res.data);
         });
       },
 

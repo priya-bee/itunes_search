@@ -14,8 +14,24 @@ import axios from 'axios'
 //           }
 // }
 export default{
-	// var myScope = this;
-	returnme: [],
+	parseData(data){
+		var output = [];
+		// var myScope = this;
+		data.results.forEach(function (r){
+			var addMe = {
+				kind: r['kind'],
+				id : r['trackId'],
+				name: r['artistName'],
+				genre: r['primaryGenreName'],
+				artwork: r['artworkUrl30'],
+				url: r['trackViewUrl']
+			}
+			// console.log(addMe);
+			output.push(addMe);
+		});
+		return output;
+	},
+
 	getResults: function(s){
 		// var myScope = this;
 		// axios.get('http://itunes.apple.com/search?term=' + s).then(response => {
@@ -28,7 +44,7 @@ export default{
 		// });
 
 		return axios.get('http://itunes.apple.com/search?term=' + s).then(res => { // this returns a promise
-			return res;
+			return this.parseData(res.data);
 		});
 	}
 }
