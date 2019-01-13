@@ -15,19 +15,41 @@ import axios from 'axios'
 // }
 export default{
 	parseData(data){
-		var output = [];
+		var output = {
+			'songs' : [],
+			'books' : [],
+			'albums' : [],
+			'coachedAudios' : [],
+			'featureMovies' : [],
+			'interactiveBooklets' : [],
+			'musicVideos' : [],
+			'podcastEpisodes' : [],
+			'softwarePackages' : [],
+			'tvEpisodes' : [],
+			'artists' : []
+		};
 		// var myScope = this;
 		data.results.forEach(function (r){
+
 			var addMe = {
-				kind: r['kind'],
 				id : r['trackId'],
 				name: r['artistName'],
 				genre: r['primaryGenreName'],
-				artwork: r['artworkUrl30'],
+				artwork: r['artworkUrl100'],
 				url: r['trackViewUrl']
 			}
-			// console.log(addMe);
-			output.push(addMe);
+			if(r['kind'] == 'song') output['songs'].push(addMe);
+			else if(r['kind'] == 'book') output['books'].push(addMe);
+			else if(r['kind'] == 'album') output['albums'].push(addMe);
+			else if(r['kind'] == 'coached-audio') output['coachedAudios'].push(addMe);
+			else if(r['kind'] == 'feature-movie') output['featureMovies'].push(addMe);
+			else if(r['kind'] == 'interactive-booklet') output['interactiveBooklets'].push(addMe);
+			else if(r['kind'] == 'music-video') output['musicVideos'].push(addMe);
+			else if(r['kind'] == 'podcast-episode') output['podcastEpisodes'].push(addMe);
+			else if(r['kind'] == 'software-package') output['softwarePackages'].push(addMe);
+			else if(r['kind'] == 'tv-episode') output['tvEpisodes'].push(addMe);
+			else if(r['kind'] == 'artist') output['artists'].push(addMe);
+
 		});
 		return output;
 	},

@@ -8,7 +8,3 @@ Vue.config.productionTip = false
 new Vue({
   render: h => h(App),
 }).$mount('#app')
-
-
-
-SearchApi.getResults('neutral milk hotel');

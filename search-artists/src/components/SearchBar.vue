@@ -4,7 +4,15 @@
     <button v-on:click="displayResults(searchTerm)">Find</button>
     <button v-on:click="clear">Clear</button>
     <div>{{searchTerm}}</div>
-    <div>{{output}}</div>
+    <div v-if="output.songs"> SONGS 
+      <ul id="songlist">
+        <li v-for="song in output.songs">
+          {{song}}
+          <img :src="song.artwork"/> <!-- v-binding the artwork to the img src attribute-->
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -29,7 +37,7 @@
       },
 
       clear(){
-        searchTerm = ''
+        this.searchTerm = ''
       }
     }
   }
