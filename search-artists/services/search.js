@@ -33,7 +33,8 @@ export default{
 
 			var addMe = {
 				id : r['trackId'],
-				name: r['artistName'],
+				artistName: r['artistName'],
+				tackName: r['trackName'],
 				genre: r['primaryGenreName'],
 				artwork: r['artworkUrl100'],
 				url: r['trackViewUrl']

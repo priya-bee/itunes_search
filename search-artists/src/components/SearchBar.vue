@@ -6,8 +6,8 @@
     <div>{{searchTerm}}</div>
 
     <div v-if="output.songs">
-      SONGS
-      <MediaComponent :mediaData="output.songs"></MediaComponent>
+      SONG RESULTS: {{output.songs.length}}
+      <MediaComponent @favorite-added="addToFavorites" :mediaData="output.songs"></MediaComponent>
     </div>
 
     <div v-if="output.books">
@@ -18,7 +18,14 @@
     <div v-if="favorites">
       FAVORITES 
       <ul>
-        <li v-for="fav in favorites">{{fav}}</li>
+        <li v-for="fav in favorites">
+          id: {{fav.id}}
+          artist name: {{fav.artistName}}
+          track name: {{fav.trackName}}
+          genre: {{fav.genre}}
+          url: <a :href="fav.url">{{fav.url}}</a>
+          <img :src="fav.artwork"/> 
+        </li>
       </ul>
     </div>
 
@@ -34,20 +41,25 @@
     	return {
         searchTerm: '',
         output: [],
-        favorites: null
+        favorites: []
       }
     },
     methods: {
       displayResults(s){
         var myScope = this; // save the scope since we set output in a callback
         SearchApi.getResults(s).then(res =>{
-          this.output = res; // TO DO: PARSE AND DISPLAY THIS DATA
-          // parseData(res.data);
+          this.output = res; 
         });
       },
 
       clear(){
-        this.searchTerm = ''
+        this.searchTerm = '';
+        this.output = []
+      },
+
+      addToFavorites(item){
+        console.log(item)
+        this.favorites.push(item);
       }
     },
     components: {

@@ -1,15 +1,16 @@
 <template>
 	<div v-if="mediaData"> 
-	        <ul>
+	        <ol>
 	          <li v-for="item in mediaData">
 	            id: {{item.id}}
-	            name: {{item.name}}
+	            artist name: {{item.artistName}}
+	            track name: {{item.trackName}}
 	            genre: {{item.genre}}
 	            url: <a :href="item.url">{{item.url}}</a>
 	            <img :src="item.artwork"/> 
-	            <button>Add to favorite</button>
+	            <button v-on:click="addToFavorites(item)">Add to favorite</button>
 	          </li>
-	        </ul>
+	        </ol>
 	</div>	
 </template>
 
@@ -19,6 +20,11 @@
 		data(){
 			return {
 
+			}
+		},
+		methods: {
+			addToFavorites(item){
+				this.$emit('favorite-added', item)
 			}
 		}
 	}
