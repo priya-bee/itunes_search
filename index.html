@@ -7,9 +7,14 @@
 	<body>
 		<div id="app">
 			<input type="text" v-model="searchTerm" placeholder="Enter here...">
-
+			<button v-on:click="getResults(searchTerm)">Find</button>
+			<button v-on:click="clear">Clear</button>
 			<div v-show="searchTerm">
-				Showing results for {{searchTerm}}
+				Showing results for "{{searchTerm}}"
+			</div>
+
+			<div v-show="myMedia">
+				{{myMedia}}
 			</div>
 		</div>
 	</body>
@@ -17,3 +22,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- check if this is better than installing the cli? -->
 <script src="main.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
