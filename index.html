@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>itunes search</title>
+		<title>PriyaBhatnagar iTunes Search API</title>
 	</head>
 
 	<body>
 		<div id="app">
-			<h1>{{search}}</h1>
+			<input type="text" v-model="searchTerm" placeholder="Enter here...">
+
+			<div v-show="searchTerm">
+				Showing results for {{searchTerm}}
+			</div>
 		</div>
 	</body>
 </html>
