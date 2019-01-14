@@ -3,6 +3,8 @@
 ## Dependencies
 
 1. vue
+	- node, npm
+	- vue-cli
 2. axios
 
 ## Install
