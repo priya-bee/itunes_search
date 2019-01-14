@@ -3,32 +3,37 @@
     <input type="text" v-model="searchTerm" placeholder="Enter here..."/>
     <button v-on:click="displayResults(searchTerm)">Find</button>
     <button v-on:click="clear">Clear</button>
-    <div>{{searchTerm}}</div>
+    <div v-if="searchTerm">Press Find to display results for: {{searchTerm}}</div>
+    <div class="resultsbox">
+      <div v-if="output.songs">
+        SONG RESULTS: {{output.songs.length}}
+        <MediaComponent @favorite-added="addToFavorites" :mediaData="output.songs"></MediaComponent>
+      </div>
 
-    <div v-if="output.songs">
-      SONG RESULTS: {{output.songs.length}}
-      <MediaComponent @favorite-added="addToFavorites" :mediaData="output.songs"></MediaComponent>
-    </div>
+      <div v-if="output.books">
+        BOOKS RESULTS: {{output.books.length}}
+        <MediaComponent @favorite-added="addToFavorites" :mediaData="output.books"></MediaComponent>
+      </div>
 
-    <div v-if="output.books">
-      BOOKS RESULTS: {{output.books.length}}
-      <MediaComponent :mediaData="output.books"></MediaComponent>
-    </div>
-
-    <div v-if="favorites">
-      FAVORITES 
-      <ul>
-        <li v-for="fav in favorites">
-          id: {{fav.id}}
-          artist name: {{fav.artistName}}
-          track name: {{fav.trackName}}
-          genre: {{fav.genre}}
-          url: <a :href="fav.url">{{fav.url}}</a>
-          <img :src="fav.artwork"/> 
-        </li>
-      </ul>
+      <div v-if="favorites">
+        FAVORITES 
+        <ul>
+          <li v-for="fav in favorites" class="favbox">
+            <img :src="fav.artwork" width="100px" height="100px" /> 
+              <div class="infobox">
+                <div>id: {{fav.id}}</div>
+                <div>artist name: {{fav.artistName}}</div>
+                <div>track name: {{fav.trackName}}</div>
+                <div>genre: {{fav.genre}}</div>
+                <div>url: <a :href="fav.url">{{fav.url}}</a></div>
+                <button v-on:click="addToFavorites(fav)">Add to favorite</button>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -46,7 +51,6 @@
     },
     mounted(){
       if(localStorage.getItem('favorites')){
-        console.log(localStorage.favorites);
         this.favorites = JSON.parse(localStorage.getItem('favorites'));
       }
     },
@@ -83,20 +87,16 @@
 </script>
 
 <style>
-  .results {
+  .resultsbox {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
+    flex-direction: row;
   }
-  .media{
-    display: flex;
-    flex-direction: column;
-
-    .li{
-            display: flex;
-            flex-direction: column;
-
-    }
+  .favbox{
+    border: 2px solid black;
+    display:flex;
+    flex-direction: row;
   }
 </style>
