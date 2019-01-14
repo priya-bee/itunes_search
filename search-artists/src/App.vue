@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
   import SearchBar from './components/SearchBar.vue'
 
   // import SearchApi from '../services/search'
@@ -13,7 +12,6 @@
   export default {
     name: 'app',
     components: {
-      HelloWorld,
       SearchBar
     }
   }
