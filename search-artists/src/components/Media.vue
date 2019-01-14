@@ -1,9 +1,9 @@
 <template>
 	<div v-if="mediaData"> 
 		<ol>
-			<li v-for="item in mediaData" class="mainbox" :key = "item.id">
+			<li v-for="item in mediaData" class="mainbox" :key = "item.id"> <!-- mainbox so pic and info are side by side -->
 				<img :src="item.artwork" width="100px" height="100px" />
-				<div class="infobox">
+				<div class="infobox"> <!-- infobox for row view of data -->
 					<div>id: {{item.id}}</div>
 					<div>artist name: {{item.artistName}}</div>
 					<div>track name: {{item.trackName}}</div>
@@ -18,7 +18,7 @@
 
 <script>
 	export default{
-		props: ['mediaData'],
+		props: ['mediaData'], // receive data from parent component to display
 		data(){
 			return {
 
@@ -26,7 +26,7 @@
 		},
 		methods: {
 			addToFavorites(item){
-				this.$emit('favorite-added', item)
+				this.$emit('favorite-added', item) // emit to parent that an item needs to be favorited
 			}
 		}
 	}

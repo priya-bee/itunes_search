@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios' // promise-based http client (https://www.npmjs.com/package/axios)
 
-const url = 'https://itunes.apple.com/search?term=';
+const url = 'https://itunes.apple.com/search?term='; // our extenal iTunes api we use to get the search data over https
 
 
 
@@ -45,7 +45,7 @@ export default{
 				artwork: r['artworkUrl100'],
 				url: r['trackViewUrl']
 			}
-			
+			// Here we are assuming the different 'kinds' will be constant 
 			if(r['kind'] == 'book') output['books'].push(addMe);
 			else if(r['kind'] == 'album') output['albums'].push(addMe);
 			else if(r['kind'] == 'coached-audio') output['coachedAudios'].push(addMe);
@@ -69,14 +69,17 @@ export default{
 		}
 
 		return axios.get(url+s, {
-			method: '*',
+			method: 'GET',
 			mode: 'no-cors',
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			}
 		}).then(res => { // this returns a promise
 			return this.parseData(res.data);
-		});
+		},
+			error =>{
+				console.log(error)
+			});
 
 	}
 }
