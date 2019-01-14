@@ -5,20 +5,20 @@
     <button v-on:click="clear">Clear</button>
     <div v-if="searchTerm">Press Find to display results for: {{searchTerm}}</div>
     <div class="resultsbox">
-      <div v-if="output.songs">
+      <div v-if="output.songs && output.songs.length > 0">
         SONG RESULTS: {{output.songs.length}}
         <MediaComponent @favorite-added="addToFavorites" :mediaData="output.songs"></MediaComponent>
       </div>
 
-      <div v-if="output.books">
+      <div v-if="output.books && output.books.length > 0">
         BOOKS RESULTS: {{output.books.length}}
         <MediaComponent @favorite-added="addToFavorites" :mediaData="output.books"></MediaComponent>
       </div>
 
-      <div v-if="favorites">
+      <div v-if="favorites && favorites.length > 0">
         FAVORITES 
         <ul>
-          <li v-for="fav in favorites" class="favbox">
+          <li v-for="fav in favorites" class="favbox" :key = "fav.id">
             <img :src="fav.artwork" width="100px" height="100px" /> 
               <div class="infobox">
                 <div>id: {{fav.id}}</div>
@@ -42,7 +42,7 @@
   export default {
     name: 'SearchBar',
     data: function() {
-    	return {
+      return {
         searchTerm: '',
         output: [],
         favorites: [],
@@ -58,7 +58,7 @@
       displayResults(s){
         var myScope = this; // save the scope since we set output in a callback
         SearchApi.getResults(s).then(res =>{
-          this.output = res; 
+          myScope.output = res; 
         });
       },
 
