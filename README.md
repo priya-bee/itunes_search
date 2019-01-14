@@ -11,6 +11,6 @@
 3. Change the directory to ```itunes_search/search-artists``` 
 	> ```cd itunes_search/search-artists ```
 4. Run ```npm install``` to install the dependencies from ```package.json```
-5. Change the directory to ```itunes_search/search-artists/to src```
+5. Change the directory to ```itunes_search/search-artists/src```
 6. Run ```vue serve -o```. This will open the application in your browser locally on port: 8080
 
