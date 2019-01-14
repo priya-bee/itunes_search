@@ -9,7 +9,7 @@
 					<div>track name: {{item.trackName}}</div>
 					<div>genre: {{item.genre}}</div>
 					<div>url: <a :href="item.url">{{item.url}}</a></div>
-					<button v-on:click="addToFavorites(item)">Add to favorite</button>
+					<button v-on:click="addToFavorites(item)">Add to favorites</button>
 				</div>
 			</li>
 		</ol>
