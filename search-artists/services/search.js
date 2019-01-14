@@ -1,18 +1,7 @@
 import axios from 'axios'
-//const url = 'https://itunes.apple.com/search?term='
 
-// TO DO: debug CORS policy err
+const url = 'https://itunes.apple.com/search?term=';
 
-// axios.defaults.withCredentials = true;
-// const config = {
-//           headers: {
-//             'Access-Control-Allow-Origin': '*',
-//             'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
-//             'Access-Control-Allow-Headers': 'Access-Control-Allow-Methods, Access-Control-Allow-Origin, Origin, Accept, Content-Type',
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'
-//           }
-// }
 
 
 // all the 'kinds' from itunes api:
@@ -26,8 +15,10 @@ import axios from 'axios'
 // podcast-episode, 
 // software-package, 
 // song, 
-// tv- episode, 
+// tv-episode, 
 // artist
+
+
 export default{
 	parseData(data){
 		var output = {
@@ -43,7 +34,7 @@ export default{
 			'tvEpisodes' : [],
 			'artists' : []
 		};
-		// var myScope = this;
+
 		data.results.forEach(function (r){
 
 			var addMe = {
@@ -73,8 +64,18 @@ export default{
 	},
 
 	getResults: function(s){
-		return axios.get('http://itunes.apple.com/search?term=' + s).then(res => { // this returns a promise
+		if(s.toLowerCase() == "hello"){
+			s += '.';
+		}
+		return axios.get(url+s, {
+			method: '*',
+			mode: 'no-cors',
+			headers: {
+				'Access-Control-Allow-Origin': '*'
+			}
+		}).then(res => { // this returns a promise
 			return this.parseData(res.data);
 		});
+
 	}
 }
