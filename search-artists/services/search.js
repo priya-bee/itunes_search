@@ -64,9 +64,10 @@ export default{
 	},
 
 	getResults: function(s){
-		if(s.toLowerCase() == "hello"){
+		if(s.toLowerCase() == "hello"){ //TO DO: investigate why 'hello' is the only string to throw a cors policy err
 			s += '.';
 		}
+
 		return axios.get(url+s, {
 			method: '*',
 			mode: 'no-cors',
