@@ -78,7 +78,8 @@ export default{
 			return this.parseData(res.data);
 		},
 			error =>{
-				console.log(error)
+				// error handling
+				// console.log(error)
 			});
 
 	}
