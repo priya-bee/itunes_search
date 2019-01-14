@@ -16,3 +16,7 @@
 5. Change the directory to ```itunes_search/search-artists/src```
 6. Run ```vue serve -o```. This will open the application in your browser locally on port: 8080
 
+
+## Favorites
+Enter your search term. You can add a result to your favorites which will appear at the top, before your results
+

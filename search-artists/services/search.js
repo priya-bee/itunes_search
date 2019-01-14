@@ -69,18 +69,19 @@ export default{
 		}
 
 		return axios.get(url+s, {
-			method: 'GET',
-			mode: 'no-cors',
-			headers: {
-				'Access-Control-Allow-Origin': '*'
-			}
+			crossdomain: true
+			// method: 'GET',
+			// mode: 'no-cors', // Commenting this out because no-cors will return an opaque response
+			// // Headers not working, axios sets headers in res not req
+			// headers: {
+			// 	'Access-Control-Allow-Origin': '*'
+			// }
 		}).then(res => { // this returns a promise
 			return this.parseData(res.data);
-		},
-			error =>{
-				// error handling
-				// console.log(error)
-			});
+		},error =>{
+			// error handling
+			console.log(error)
+		});
 
 	}
 }
