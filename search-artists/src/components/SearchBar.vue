@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <input type="text" v-model="searchTerm" placeholder="Enter here..."/>
     <button v-on:click="displayResults(searchTerm)">Find</button>
     <button v-on:click="clear">Clear</button>
@@ -11,7 +11,7 @@
     </div>
 
     <div v-if="output.books">
-      BOOKS
+      BOOKS RESULTS: {{output.books.length}}
       <MediaComponent :mediaData="output.books"></MediaComponent>
     </div>
 
@@ -28,7 +28,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </template>
 
@@ -41,7 +40,14 @@
     	return {
         searchTerm: '',
         output: [],
-        favorites: []
+        favorites: [],
+        testName: ''
+      }
+    },
+    mounted(){
+      if(localStorage.getItem('favorites')){
+        console.log(localStorage.favorites);
+        this.favorites = JSON.parse(localStorage.getItem('favorites'));
       }
     },
     methods: {
@@ -58,12 +64,20 @@
       },
 
       addToFavorites(item){
-        console.log(item)
         this.favorites.push(item);
       }
     },
     components: {
       MediaComponent
+    },
+    watch: {
+      favorites: {
+        handler(){
+            localStorage.setItem('favorites', JSON.stringify(this.favorites));
+        },
+        deep: true       
+      }
+
     }
   }
 </script>
